@@ -83,8 +83,7 @@ public class NeighboursActivityTest {
         //We check that the name is display and match the name of the neighbour
         ViewInteraction textView =
                 onView(allOf(withId(R.id.name), withText("Caroline"), isDisplayed()));
-        textView
-                .check(matches(withText("Caroline")));
+        textView.check(matches(withText("Caroline")));
     }
 
     /**
