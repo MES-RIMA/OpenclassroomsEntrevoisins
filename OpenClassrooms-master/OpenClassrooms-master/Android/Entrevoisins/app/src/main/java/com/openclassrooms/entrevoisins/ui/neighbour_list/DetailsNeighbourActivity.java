@@ -4,7 +4,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +14,6 @@ import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 public class DetailsNeighbourActivity extends AppCompatActivity {
-    private ImageView img;
-    private TextView nom, addlocal, tel, mail, title, description;
 
     private FloatingActionButton addfav;
     private NeighbourApiService mApiService;
@@ -28,20 +25,20 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
 
         mApiService = DI.getNeighbourApiService();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        CollapsingToolbarLayout toolBarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbarlayout);
+        CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbarlayout);
 
 
-        img = (ImageView) findViewById(R.id.avatar);
-        nom = (TextView) findViewById(R.id.name);
-        addlocal = (TextView) findViewById(R.id.address);
-        tel = (TextView) findViewById(R.id.number_phone);
-        mail = (TextView) findViewById(R.id.reseau_sociaux);
-        title = (TextView) findViewById(R.id.title);
-        description = (TextView) findViewById(R.id.aboutMe);
+        ImageView img = findViewById(R.id.avatar);
+        TextView nom = findViewById(R.id.name);
+        TextView addlocal = findViewById(R.id.address);
+        TextView tel = findViewById(R.id.number_phone);
+        TextView mail = findViewById(R.id.reseau_sociaux);
+        TextView title = findViewById(R.id.title);
+        TextView description = findViewById(R.id.aboutMe);
         addfav = findViewById(R.id.add_fav);
         Neighbour neighbour;
         if (getIntent().getExtras() != null) {
@@ -65,19 +62,16 @@ public class DetailsNeighbourActivity extends AppCompatActivity {
                 addfav.setImageResource(R.drawable.ic_star_border_white_24dp);
             }
 
-           addfav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (neighbour.isFavorite()) {
-                        addfav.setImageResource(R.drawable.ic_star_border_white_24dp);
-                    } else {
-                       addfav.setImageResource(R.drawable.ic_star_white_24dp);
+           addfav.setOnClickListener(v -> {
+               if (neighbour.isFavorite()) {
+                   addfav.setImageResource(R.drawable.ic_star_border_white_24dp);
+               } else {
+                  addfav.setImageResource(R.drawable.ic_star_white_24dp);
 
-                    }
-                    neighbour.setFavorite(!neighbour.isFavorite());
-                    mApiService.modifyNeighbour(neighbour);
-                }
-            });
+               }
+               neighbour.setFavorite(!neighbour.isFavorite());
+               mApiService.modifyNeighbour(neighbour);
+           });
         }
     }
 
