@@ -58,7 +58,8 @@
         android:backgroundTint="#FFFF"
         android:clickable="true"
         app:borderWidth="0dp"
-        app:srcCompat="@drawable/ic_star_border_white_24dp" />
+        app:srcCompat="@drawable/ic_star_border_white_24dp"
+        android:focusable="true" />
 
 
     <android.support.v4.widget.NestedScrollView
@@ -96,7 +97,7 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="15dp"
-                        android:text="name"
+                        android:text="@string/name"
                         android:textStyle="bold"
                         android:textSize="25sp" />
 
@@ -111,12 +112,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_marginTop="15dp"
-                        android:text=" place to be "
+                        android:text="@string/place_to_be"
                         android:layout_gravity="center_vertical"
                         android:drawablePadding="15dip"
-                        android:drawableLeft="@drawable/ic_baseline_place_24"
+                        android:drawableStart="@drawable/ic_baseline_place_24"
                         android:drawableTint="@color/colorAccent"
                         />
 
@@ -125,12 +126,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_marginTop="15dp"
-                        android:text="hello"
+                        android:text="@string/hello"
                         android:layout_gravity="center_vertical"
                         android:drawablePadding="15dip"
-                        android:drawableLeft="@drawable/ic_baseline_phone_24"
+                        android:drawableStart="@drawable/ic_baseline_phone_24"
                         android:drawableTint="@color/colorAccent"
                         />
 
@@ -141,10 +142,10 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginTop="15dp"
-                        android:text="social media "
+                        android:text="@string/social_media"
                         android:layout_gravity="center_vertical"
                         android:drawablePadding="15dip"
-                        android:drawableLeft="@drawable/ic_baseline_language_24"
+                        android:drawableStart="@drawable/ic_baseline_language_24"
                         android:drawableTint="@color/colorAccent"
                         />
 
@@ -174,7 +175,7 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="About me "
+                        android:text="@string/about_me"
                         android:textEditNoPasteWindowLayout="@id/background_contact"
                         app:layout_constraintTop_toTopOf="@id/background_about"
                         android:textStyle="bold"
@@ -191,9 +192,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginRight="15dp"
+                        android:layout_marginEnd="15dp"
                         android:layout_marginTop="10dp"
-                        android:text="MORE TEXT"
+                        android:text="@string/more_text"
                         android:textEditNoPasteWindowLayout="@id/background_contact"
                         app:layout_constraintTop_toBottomOf="@id/title" />
 
