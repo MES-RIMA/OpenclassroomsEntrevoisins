@@ -11,20 +11,23 @@ import com.example.maru.databinding.ActivityAddMeetingBinding;
 import com.example.maru.model.Meeting;
 import com.example.maru.service.MeetingApiService;
 
-public class AddMeetingActivity extends AppCompatActivity implements View.OnClickListener{
+import java.util.Objects;
+
+public class AddMeetingActivity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityAddMeetingBinding binding;
-    private MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 
     private void initUI() {
         binding = ActivityAddMeetingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         setButton();
-        getSupportActionBar().setTitle("New Meeting");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("New Meeting");
     }
 
-    private void setButton() { binding.submitButton.setOnClickListener(this);
+    private void setButton() {
+        binding.submitButton.setOnClickListener(this);
     }
 
     @Override
@@ -41,10 +44,10 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void onSubmit() {
-        String place = binding.textFieldPlace.getEditText().getText().toString();
-        String hour = binding.textFieldHour.getEditText().getText().toString();
-        String subject = binding.textFieldSubject.getEditText().getText().toString();
-        String recipient = binding.textFieldRecipient.getEditText().getText().toString();
+        String place = Objects.requireNonNull(binding.textFieldPlace.getEditText()).getText().toString();
+        String hour = Objects.requireNonNull(binding.textFieldHour.getEditText()).getText().toString();
+        String subject = Objects.requireNonNull(binding.textFieldSubject.getEditText()).getText().toString();
+        String recipient = Objects.requireNonNull(binding.textFieldRecipient.getEditText()).getText().toString();
 
         if (place.isEmpty()) {
             binding.textFieldPlace.setError("Please type a place");
@@ -63,7 +66,7 @@ public class AddMeetingActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        mMeetingApiService.createMeeting(new Meeting (place,hour,subject,recipient));
+        mMeetingApiService.createMeeting(new Meeting(place, hour, subject, recipient));
         Toast.makeText(this, "Mail sent !", Toast.LENGTH_SHORT).show();
         finish();
 

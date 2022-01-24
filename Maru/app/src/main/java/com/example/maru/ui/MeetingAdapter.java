@@ -1,5 +1,6 @@
 package com.example.maru.ui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +19,15 @@ import java.util.ArrayList;
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
 
     // FOR DATA ---
-    private ArrayList<Meeting> meetings;
+    private final ArrayList<Meeting> meetings;
     // FOR CALLBACK ---
-    private DeleteListener callback;
+    private final DeleteListener callback;
+
     public interface DeleteListener {
         void onClickDelete(Meeting meeting);
     }
 
-    public MeetingAdapter(ArrayList<Meeting> meetings,DeleteListener callback) {
+    public MeetingAdapter(ArrayList<Meeting> meetings, DeleteListener callback) {
         this.meetings = meetings;
         this.callback = callback;
     }
@@ -42,9 +44,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position){
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Meeting meeting = meetings.get(position);
-        viewHolder.displayMeeting(meeting,callback);
+        viewHolder.displayMeeting(meeting, callback);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -62,7 +64,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         public final TextView recipient;
         public final TextView hour;
         public final TextView subject;
-        private ImageButton deleteButton;
+        private final ImageButton deleteButton;
 
 
         public ViewHolder(View view) {
@@ -75,13 +77,14 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
 
         }
 
+        @SuppressLint("SetTextI18n")
         public void displayMeeting(Meeting meeting, MeetingAdapter.DeleteListener callback) {
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
 
             subject.setText(meeting.getSubject());
             place.setText(meeting.getPlace());
             recipient.setText("To: " + meeting.getRecipient());
-           hour.setText(meeting.getHour());
+            hour.setText(meeting.getHour());
             deleteButton.setOnClickListener(view -> callback.onClickDelete(meeting));
         }
 

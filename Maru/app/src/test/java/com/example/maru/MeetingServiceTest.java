@@ -1,5 +1,6 @@
 package com.example.maru;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,5 +56,17 @@ public class MeetingServiceTest {
         assertFalse(service.getMeetings().contains(meetingToDelete));
     }
 
-}
+    @Test
+    public void getMeetingsFilteredByDateWithSuccess() {
+        Date dateRef = new Date();
+        dateRef.setTime(1626557205000L);
+        service.getMeetingsFilteredByDate(dateRef).clear();
+        for (int i = 0; i < 5; i++) {
+            Date meeting = service.getMeetings().get(i).getDate();
+            if (meeting.equals(dateRef)) {
+                assertEquals(service.getMeetingsFilteredByDate(dateRef).size(), 4);
+            }
+        }
 
+    }
+}
