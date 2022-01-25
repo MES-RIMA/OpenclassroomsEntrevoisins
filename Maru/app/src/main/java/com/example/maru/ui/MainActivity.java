@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ActivityMainBinding binding;
     private MeetingAdapter mAdapter;
     private List<Meeting> mMeetingArrayList;
-    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+    public final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 
 
     private void initUI() {
