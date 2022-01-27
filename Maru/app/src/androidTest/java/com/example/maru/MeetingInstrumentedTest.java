@@ -1,11 +1,7 @@
 package com.example.maru;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.example.maru.RecyclerViewUtils.clickChildView;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
@@ -13,8 +9,6 @@ import static org.junit.Assert.assertThat;
 
 import android.content.Context;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.ViewMatchers;
@@ -60,27 +54,6 @@ public class MeetingInstrumentedTest {
     @Test
     public void checkIfRecyclerViewIsNotEmpty() {
         onView(withId(R.id.recyclerview)).check(new RecyclerViewUtils.ItemCount(currentMeetingsSize));
-    }
-
-  @Test
-    public void checkIfAddingMeetingIsWorking() {
-      onView(ViewMatchers.withId(R.id.start_add_activity)).perform(click());
-      String place= "Reunion A";
-      String hour="15";
-      String subject="financement";
-      String recipient="rori@gmail.com";
-
-      onView(withId(R.id.place)).perform(ViewActions.typeText(place));
-      onView(withId(R.id.hour)).perform(ViewActions.typeText(hour));
-      onView(withId(R.id.subject)).perform(ViewActions.typeText(subject));
-      onView(withId(R.id.recipient)).perform(ViewActions.typeText(recipient));
-      Espresso.closeSoftKeyboard();
-      onView(withId(R.id.submitButton)).perform(click());
-      onView(withText(place)).check(matches(isDisplayed()));
-      onView(withText(hour)).check(matches(isDisplayed()));
-      onView(withText(subject)).check(matches(isDisplayed()));
-      onView(withText(recipient)).check(matches(isDisplayed()));
-      onView(withId(R.id.recyclerview)).check(new RecyclerViewUtils.ItemCount(currentMeetingsSize + 1));
     }
 
     @Test
