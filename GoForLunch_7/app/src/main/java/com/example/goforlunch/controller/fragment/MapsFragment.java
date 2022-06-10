@@ -30,7 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * create an instance of this fragment.
  */
 public class MapsFragment extends BaseFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
+private double latitude;
+private double longitude;
     private GoogleMap mMap;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 789;
 
@@ -79,7 +80,9 @@ public class MapsFragment extends BaseFragment implements OnMapReadyCallback, Go
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
                 mMap.getUiSettings().setMyLocationButtonEnabled(true);
-                LatLng currentLocation = new LatLng(currentLat, currentLng);
+                latitude = currentLat;
+                longitude = currentLng;
+                LatLng currentLocation = new LatLng(latitude, longitude);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
             } else {
                 ActivityCompat.requestPermissions(requireActivity(),

@@ -64,7 +64,9 @@
         <meta-data
         android:name="com.google.android.gms.version"
         android:value="@integer/google_play_services_version" />
-
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     <!--
          The API key for Google Maps-based APIs is defined as a string resource.
          (See the file "res/values/google_maps_api.xml").
@@ -75,7 +77,7 @@
     -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBndp_kD6OvxXLrx8ktY3qna2dPV88JsPY" />
+            android:value="@string/MAPS_API_KEY" />
         <!-- NOTIFICATION SERVICE -->
         <service android:name=".utils.NotificationsService"
             tools:ignore="Instantiatable">

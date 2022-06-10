@@ -13,7 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.goforlunch.R;
+import com.example.goforlunch.modele.firebase.User;
+import com.example.goforlunch.utils.UserHelper;
 import com.example.goforlunch.views.WorkmatesRecyclerViewAdapter;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +29,7 @@ import com.example.goforlunch.views.WorkmatesRecyclerViewAdapter;
 public class WorkmatesListFragment extends BaseFragment {
 
     private WorkmatesRecyclerViewAdapter mRecyclerViewAdapter;
+    private Boolean isUsersListIsReady = false;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -49,7 +56,37 @@ public class WorkmatesListFragment extends BaseFragment {
                     context);
             recyclerView.setAdapter(this.mRecyclerViewAdapter);
         }
+        this.setFirestoreListener();
         return view;
+
+    }
+
+    public void setUsersList(ArrayList<User> usersList) {
+        this.usersList.clear();
+        this.usersList.addAll(usersList);
+        notifyFragment();
+    }
+
+    //FIRESTORE\\
+    private void setFirestoreListener() {
+        UserHelper.listenerUsersCollection().addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (queryDocumentSnapshots != null) {
+                List<DocumentSnapshot> documentSnapshotList = new ArrayList<>(queryDocumentSnapshots.getDocuments());
+                usersList = new ArrayList<>();
+                if (documentSnapshotList.size() != 0) {
+                    for (DocumentSnapshot documentSnapshot : documentSnapshotList) {
+                        usersList.add(documentSnapshot.toObject(User.class));
+                    }
+                }
+                if (!isUsersListIsReady) {
+                    isUsersListIsReady = true;
+                    recoversData();
+                } else {
+                    setUsersList(usersList);
+                }
+            }
+
+        });
     }
 
     @Override
@@ -70,6 +107,7 @@ public class WorkmatesListFragment extends BaseFragment {
     }
 
     @Override
-    protected void updateWithPosition() { }
+    protected void updateWithPosition() {
+    }
 
 }

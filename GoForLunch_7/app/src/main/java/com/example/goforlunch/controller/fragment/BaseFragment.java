@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public abstract class BaseFragment extends Fragment {
 
     protected OnListFragmentInteractionListener mListener;
-    protected Double currentLat;
-    protected Double currentLng;
+    protected static Double currentLat;
+    protected static Double currentLng;
     protected ParcelableRestaurantDetails mParcelableRestaurantDetails;
     protected ArrayList<User> usersList;
 
@@ -58,11 +58,7 @@ public abstract class BaseFragment extends Fragment {
         notifyFragment();
     }
 
-    public void setUsersList(ArrayList<User> usersList) {
-        this.usersList.clear();
-        this.usersList.addAll(usersList);
-        notifyFragment();
-    }
+
 
     //OVERRIDE\\
 
